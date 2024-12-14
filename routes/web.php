@@ -66,6 +66,9 @@ Route::middleware(['IsLogin'])->group(function () {
         Route::delete('/guru/{id}', [GuruController::class, 'destroy']);
     });
 
+    Route::get('/presentase-kehadiran', [DashboardController::class, 'presentaseKehadiran'])->name('presentaseKehadiran');
+    Route::get('/get-hari', [DashboardController::class, 'getHari'])->name('getHari');
+
 
     Route::get('/jadwal-pelajaran', [JadwalPelajaranController::class, 'index']);
 
@@ -84,7 +87,7 @@ Route::middleware(['IsLogin'])->group(function () {
     Route::post('/update-status-presensi', [DetailPresensiController::class, 'updateStatusPresensi'])->name('updateStatusPresensi');
 
     Route::get('/rekap-presensi', [RekapPresensiController::class, 'index']);
-    Route::get('/rekap-presensi/get-kelas-by-tahun-ajaran', [RekapPresensiController::class, 'getKelasByTahunAjaran'])->name('getKelasByTahunAjaran');
+    // Route::get('/rekap-presensi/get-kelas-by-tahun-ajaran', [RekapPresensiController::class, 'getKelasByTahunAjaran'])->name('getKelasByTahunAjaran');
     Route::get('/rekap-presensi/get-mata-pelajaran-by-kelas', [RekapPresensiController::class, 'getMataPelajaranByKelas'])->name('getMataPelajaranByKelas');
     Route::post('/rekap-presensi/generate', [RekapPresensiController::class, 'generateRekap'])->name('rekap.presensi.generate');
     Route::get('/rekap-presensi/rekapan-kelas-mapel', [RekapPresensiController::class, 'getRekapanByKelasMataPelajaran'])->name('getRekapanByKelasMataPelajaran');

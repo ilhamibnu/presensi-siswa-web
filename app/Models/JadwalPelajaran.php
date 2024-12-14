@@ -16,6 +16,11 @@ class JadwalPelajaran extends Model
         'kelas_id',
     ];
 
+    public function presensi()
+    {
+        return $this->hasMany(Presensi::class);
+    }
+
     public function detailJadwalPelajaran()
     {
         return $this->hasMany(DetailJadwalPelajaran::class);
