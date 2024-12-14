@@ -32,6 +32,12 @@ class DashboardController extends Controller
             // hitung jumlah guru
             $jumlah_guru = User::where('role_id', 2)->count();
 
+            if ($jumlah_guru == 0) {
+                $jumlah_guru = '0';
+            } else {
+                $jumlah_guru = $jumlah_guru;
+            }
+
             // hitung jumlah mata pelajaran
             $jumlah_mata_pelajaran = DetailJadwalPelajaran::with('jadwalPelajaran')
                 ->whereHas('jadwalPelajaran', function ($query) use ($tahun_ajaran_id) {
@@ -41,6 +47,12 @@ class DashboardController extends Controller
                 ->unique()
                 ->count();
 
+            if ($jumlah_mata_pelajaran == 0) {
+                $jumlah_mata_pelajaran = '0';
+            } else {
+                $jumlah_mata_pelajaran = $jumlah_mata_pelajaran;
+            }
+
             // hitung jumlah siswa
             $jumlah_siswa = JadwalPelajaran::where('tahun_ajaran_id', $tahun_ajaran_id)
                 ->with('kelas')
@@ -49,6 +61,12 @@ class DashboardController extends Controller
                 ->flatten()
                 ->unique()
                 ->count();
+
+            if ($jumlah_siswa == 0) {
+                $jumlah_siswa = '0';
+            } else {
+                $jumlah_siswa = $jumlah_siswa;
+            }
 
 
             // presentase berdasarkan tahun ajaran
@@ -106,7 +124,19 @@ class DashboardController extends Controller
             // hitung jumlah guru
             $jumlah_guru = User::where('role_id', 2)->count();
 
+            if ($jumlah_guru == 0) {
+                $jumlah_guru == 0;
+            } else {
+                $jumlah_guru = $jumlah_guru;
+            }
+
             $jumlah_siswa = Kelas::find($kelas_id)->siswa->count();
+
+            if ($jumlah_siswa == 0) {
+                $jumlah_siswa == 0;
+            } else {
+                $jumlah_siswa = $jumlah_siswa;
+            }
 
             // // hitung jumlah mata pelajaran
             $jumlah_mata_pelajaran = DetailJadwalPelajaran::with('jadwalPelajaran')
@@ -118,6 +148,11 @@ class DashboardController extends Controller
                 ->unique()
                 ->count();
 
+            if ($jumlah_mata_pelajaran == 0) {
+                $jumlah_mata_pelajaran == 0;
+            } else {
+                $jumlah_mata_pelajaran = $jumlah_mata_pelajaran;
+            }
 
             $presensi = Presensi::where('jadwal_pelajaran_id', $jadwal_pelajaran->id)->first();
 
@@ -129,6 +164,9 @@ class DashboardController extends Controller
                     'tidak_hadir' => 0,
                     'izin' => 0,
                     'sakit' => 0,
+                    'jumlah_guru' => $jumlah_guru,
+                    'jumlah_mata_pelajaran' => $jumlah_mata_pelajaran,
+                    'jumlah_siswa' => $jumlah_siswa,
                 ]);
             } else {
                 $total_siswa = count($detail_presensi);
